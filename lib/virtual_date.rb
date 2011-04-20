@@ -31,10 +31,6 @@ module VirtualDate
       opts = VirtualDate.get_options(attributes)
       defined_format = opts ? opts[:format] : nil
                            
-      puts %{
-        => #{opts.inspect} / #{defined_format}
-      }
-      
       attributes.each do |attribute|
         # Setter
         define_method "#{attribute.to_s}_str=" do |arg|
