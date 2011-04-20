@@ -47,5 +47,25 @@ describe VirtualDate do
     obj.some_date.year.should eql(time.year)
   end
   
+  context "when have the format defined" do
+    class MyClass2
+      include VirtualDate
+      
+      attr_accessor :some_date
+      act_as_virtual_date :some_date, :format => "%Y/%m/%d"
+    end
+    
+    let(:obj2) { MyClass2.new }
+    before { obj2.some_date = Date.today }
+    
+    it 'should convert date to string using the previos format' do
+      obj2.some_date_str.should eql(Date.today.strftime("%Y/%m/%d"))
+    end
+    
+    it 'should use the informed format instead of the defined one' do
+      obj2.some_date_str("%d-%m-%Y").should eql(Date.today.strftime("%d-%m-%Y"))
+    end
+    
+  end
   
 end
